@@ -40,10 +40,10 @@ RUN mv /Doop_Jasmine/0610newtest/ /root && tar -zxvf doop.tar.gz && mv /newdoop/
 
 RUN touch /root/newdoop/souffle-logic/analyses/context-insensitive/../../main/main-declarations.dl \
 && echo 'process_project_name = mall-admin\n\
-Jasmine_CallGraph_Path = /data/doop/out/jasminemall-admin/database/CallGraphEdge.csv\n\
-JackEE_CallGraph_Path = /data/doop/out/jackeemall-admin/database/CallGraphEdge.csv\n\
-Jasmine_ReachableMethod_Path = /data/doop/out/jasminemall-admin/database/Stats_Simple_Application_ReachableMethod.csv\n\
-JackEE_ReachableMethod_Path = /data/doop/out/jackeemall-admin/database/Stats_Simple_Application_ReachableMethod.csv\n\
+Jasmine_CallGraph_Path = /data/doop/out/jasmine/mall-admin/database/CallGraphEdge.csv\n\
+JackEE_CallGraph_Path = /data/doop/out/jackee/mall-admin/database/CallGraphEdge.csv\n\
+Jasmine_ReachableMethod_Path = /data/doop/out/jasmine/mall-admin/database/Stats_Simple_Application_ReachableMethod.csv\n\
+JackEE_ReachableMethod_Path = /data/doop/out/jackee/mall-admin/database/Stats_Simple_Application_ReachableMethod.csv\n\
 resultPath = /root/output/' >> /root/config.properties \
 && sed -i 70d /root/newdoop/runjackee.py && sed -i 70d /root/newdoop/runjasmine.py \
 && sed -i 352d /root/newdoop/src/main/groovy/org/clyze/doop/core/DoopAnalysisFactory.groovy \
