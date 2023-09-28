@@ -1,20 +1,20 @@
 # Table of Content 
 
 - [Jasmine](#jasmine)
-  * [Doop_Jasmine](#doop-jasmine)
-    + [1. Set up Doop_Jasmine as docker container](#1-set-up-doop-jasmine-as-docker-container)
+  * [Doop_Jasmine](#doop_jasmine)
+    + [1. Set up Doop_Jasmine as docker container](#1-set-up-doop_jasmine-as-docker-container)
     + [2. Reproduce Paper Section 5.2 Results on Doop](#2-reproduce-paper-section-52-results-on-doop)
-      - [2.1 JackEE, Default and Jasmine use context-insensitive analysis (corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges)](#21-jackee--default-and-jasmine-use-context-insensitive-analysis--corresponding-to-id-1-entrypoint--id-4-springaop--id-7-reachable--methods--id-8-application-edges-)
-      - [2.2 JackEE, Default and Jasmine use context-insensitive analysis and taint analysis (corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype), ID-5-InfoLeak)](#22-jackee--default-and-jasmine-use-context-insensitive-analysis-and-taint-analysis--corresponding-to-id-2-di-singleton---id-3-di-prototype---id-5-infoleak-)
+      - [2.1 JackEE, Default and Jasmine use context-insensitive analysis (corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges)](#21-jackee-default-and-jasmine-use-context-insensitive-analysis-corresponding-to-id-1-entrypoint-id-4-springaop-id-7-reachable--methods-id-8-application-edges)
+      - [2.2 JackEE, Default and Jasmine use context-insensitive analysis and taint analysis (corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype), ID-5-InfoLeak)](#22-jackee-default-and-jasmine-use-context-insensitive-analysis-and-taint-analysis-corresponding-to-id-2-disingleton-id-3-diprototype-id-5-infoleak)
     + [3. Reproduce Paper Section 5.3 Results on JackEE](#3-reproduce-paper-section-53-results-on-jackee)
       - [3.1 Run Jasmine and JackEE](#31-run-jasmine-and-jackee)
       - [3.2 Run data processing scripts](#32-run-data-processing-scripts)
-  * [Soot_Jasmine and PTA enhancement](#soot-jasmine-and-pta-enhancement)
-    + [1. Setup Soot_Jasmine:](#1-setup-soot-jasmine-)
+  * [Soot_Jasmine and PTA enhancement](#soot_jasmine-and-pta-enhancement)
+    + [1. Setup Soot_Jasmine:](#1-setup-soot_jasmine)
       - [1.1 Environment requirements](#11-environment-requirements)
-      - [1.2 CHA, SPARK and Jasmine（corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges）](#12-cha--spark-and-jasmine-corresponding-to-id-1-entrypoint--id-4-springaop--id-7-reachable--methods--id-8-application-edges-)
-      - [1.3 SPARK, Jasmine context-sensitive（corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype)）](#13-spark--jasmine-context-sensitive-corresponding-to-id-2-di-singleton---id-3-di-prototype--)
-  * [FlowDroid_Jasmine](#flowdroid-jasmine)
+      - [1.2 CHA, SPARK and Jasmine（corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges）](#12-cha-spark-and-jasminecorresponding-to-id-1-entrypoint-id-4-springaop-id-7-reachable--methods-id-8-application-edges)
+      - [1.3 SPARK, Jasmine context-sensitive（corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype)）](#13-spark-jasmine-context-sensitivecorresponding-to-id-2-disingleton-id-3-diprototype)
+  * [FlowDroid_Jasmine](#flowdroid_jasmine)
 
 ---
 
