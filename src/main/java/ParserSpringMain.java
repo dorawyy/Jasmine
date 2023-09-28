@@ -16,13 +16,15 @@ import java.util.Objects;
  */
 public class ParserSpringMain {
     // Obtain the path of the project and dependent packages to be tested
-    public static String sourceDirectory = System.getProperty("user.dir") + File.separator + "demo"
-            + File.separator + "target-demo-0.0.1" + File.separator + "BOOT-INF" + File.separator + "classes";
-    public static String dependencyDirectory = System.getProperty("user.dir") + File.separator + "demo"
-            + File.separator + "target-demo-0.0.1" + File.separator + "BOOT-INF" + File.separator + "lib";
+    public static String appDirectory = System.getProperty("user.dir") + File.separator + "demo" + File.separator + "target-demo-0.0.1" ;
+    public static String sourceDirectory = appDirectory + File.separator + "BOOT-INF" + File.separator + "classes";
+    public static String dependencyDirectory = appDirectory + File.separator + "BOOT-INF" + File.separator + "lib";
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
+
+        System.out.println("sourceDirectory is: " + sourceDirectory);
+        System.out.println("dependencyDirectory is: " + dependencyDirectory);
         initializeSoot(sourceDirectory);
 
         // processing Spring framework
