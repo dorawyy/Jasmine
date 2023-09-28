@@ -8,3 +8,5 @@ gradlew.bat
 gradlew
 sootOutput
 .DS_Store
+bin/
+target/
