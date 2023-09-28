@@ -1,10 +1,32 @@
+# Table of Content 
+
+- [Jasmine](#jasmine)
+  * [Doop_Jasmine](#doop-jasmine)
+    + [1. Set up Doop_Jasmine as docker container](#1-set-up-doop-jasmine-as-docker-container)
+    + [2. Reproduce Paper Section 5.2 Results on Doop](#2-reproduce-paper-section-52-results-on-doop)
+      - [2.1 JackEE, Default and Jasmine use context-insensitive analysis (corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges)](#21-jackee--default-and-jasmine-use-context-insensitive-analysis--corresponding-to-id-1-entrypoint--id-4-springaop--id-7-reachable--methods--id-8-application-edges-)
+      - [2.2 JackEE, Default and Jasmine use context-insensitive analysis and taint analysis (corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype), ID-5-InfoLeak)](#22-jackee--default-and-jasmine-use-context-insensitive-analysis-and-taint-analysis--corresponding-to-id-2-di-singleton---id-3-di-prototype---id-5-infoleak-)
+    + [3. Reproduce Paper Section 5.3 Results on JackEE](#3-reproduce-paper-section-53-results-on-jackee)
+      - [3.1 Run Jasmine and JackEE](#31-run-jasmine-and-jackee)
+      - [3.2 Run data processing scripts](#32-run-data-processing-scripts)
+  * [Soot_Jasmine and PTA enhancement](#soot-jasmine-and-pta-enhancement)
+    + [1. Setup Soot_Jasmine:](#1-setup-soot-jasmine-)
+      - [1.1 Environment requirements](#11-environment-requirements)
+      - [1.2 CHA, SPARK and Jasmine（corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges）](#12-cha--spark-and-jasmine-corresponding-to-id-1-entrypoint--id-4-springaop--id-7-reachable--methods--id-8-application-edges-)
+      - [1.3 SPARK, Jasmine context-sensitive（corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype)）](#13-spark--jasmine-context-sensitive-corresponding-to-id-2-di-singleton---id-3-di-prototype--)
+  * [FlowDroid_Jasmine](#flowdroid-jasmine)
+
+---
+
 # Jasmine
 
 This file contains instructions on how to build and run the tool and how to reproduce experiments in the Jasmine paper.
 
+---
+
 ## Doop_Jasmine
 
-### Set up Doop_Jasmine as docker container
+### 1. Set up Doop_Jasmine as docker container
 
 Doop_Jasmine is setup as a docker container. To setup: 
 
@@ -20,11 +42,11 @@ $ docker run -it -h Jasmine.gt --privileged=True -e "container=docker" -v /local
 
 * Now you have a built Doop_Jasmine setup in the container. In the container, you can further run bash commands mentioned in the following sections to reproduce experiments of the paper. 
 
-### Reproduce Paper Section 5.2 Results
+### 2. Reproduce Paper Section 5.2 Results on Doop
 
 This table mainly shows the improvement of Jasmine's detection ability of JackEE, including TABLE II and Fig.4.
 
-#### 1.1.1 JackEE, Default and Jasmine use context-insensitive analysis (corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges)
+#### 2.1 JackEE, Default and Jasmine use context-insensitive analysis (corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges)
 
 * In the docker container, run the following command.
 
@@ -39,7 +61,7 @@ $ bash /root/DefaultforSpringDemo.bash
 $ bash /root/JasmineforSpringDemo.bash
 ```
 
-#### 1.1.2 JackEE, Default and Jasmine use context-insensitive analysis and taint analysis (corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype), ID-5-InfoLeak)
+#### 2.2 JackEE, Default and Jasmine use context-insensitive analysis and taint analysis (corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype), ID-5-InfoLeak)
 
 * In the docker container, run the following command.
 
@@ -54,11 +76,11 @@ $ bash /root/DefaultforInfoSpringDemo.bash
 $ bash /root/JasmineforInfoSpringDemo.bash
 ```
 
-### Reproduce Paper Section 5.3 Results on JackEE
+### 3. Reproduce Paper Section 5.3 Results on JackEE
 
 This tab shows the improvement of Jasmine's detection ability of JackEE, including TABLE III, TABLE IV, Fig.5, and Fig.6. Due to differences in the performance of the relevant machines, there may be some minor differences in the correlation results.
 
-#### 1.1 Run Jasmine and JackEE
+#### 3.1 Run Jasmine and JackEE
 
 The result of **TABLE III, Fig.5 and Fig.6** can be counted by executing the following commands, in the docker container.
 
@@ -74,7 +96,7 @@ $ bash /root/TurnOffJasmine.bash
 $ python3 /root/newdoop/runjackee.py
 ```
 
-#### 1.2 Run data processing scripts
+#### 3.2 Run data processing scripts
 
 Dockerfile generates ```config.properties``` in ```/root```. Please modify items according to the output items under``` /data/doop/out/```, in the docker container.
 
@@ -99,29 +121,30 @@ $ java -jar /root/DataCollect-1.0-SNAPSHOT.jar -c /root/config.properties
 ![image-20220830155609790](https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830155609790.png)
 
 
----
 
+---
+ 
 ## Soot_Jasmine and PTA enhancement
 
-### Setup Soot_Jasmine: 
+### 1. Setup Soot_Jasmine: 
 
 _The docker container used in the previous section is for Doop_Jasmine only; for experiments on Soot, you don't need to setup that container._
 
-#### Environment requirements
+#### 1.1 Environment requirements
 
 * Java version is Java 8
 * Maven version is 3.6.1
 * Clone the following two projects:
  ```bash
  git clone https://github.com/SpringJasmine/Jasmine
- git clone https://github.com/SpringJasmine/FlowDroid_Jasmine
+
  ```
-* Open [the cloned project](https://github.com/SpringJasmine/Jasmine) in IntelliJ
+* Open [the cloned project](https://github.com/SpringJasmine/Jasmine) in IntelliJ (or other IDE)
 
 
-#### 1.2.1 CHA, SPARK and Jasmine（corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges）
+#### 1.2 CHA, SPARK and Jasmine（corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges）
 
-* Modify ```src/main/resources/config.properties``` to specify `bean_xml_paths` to the absolute path of the xml file specifying beans 
+* Modify `src/main/resources/config.properties` to specify `bean_xml_paths` to the absolute path of the xml file specifying beans 
 
 ```properties
 # Modify bean_xml_paths to the absolute path where the corresponding file
@@ -171,7 +194,7 @@ bean_xml_paths = /User/Jasmine/demo/target-demo-0.0.1/BOOT-INF/classes/bean.xml
 
 <img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830190756735.png" alt="image-20220830190756735" style="zoom:33%;" />
 
-#### 1.2.2 SPARK, Jasmine context-sensitive（corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype)）
+#### 1.3 SPARK, Jasmine context-sensitive（corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype)）
 
 * Download [Turner](http://www.cse.unsw.edu.au/~corg/turner/), a static acceleration tool for pointer analysis tool that represents a new sweet spot between precision and efficiency of Pointer Analysis.
 ```sh
@@ -218,106 +241,15 @@ $ cd Turner
 $ ./run.sh
 # the executable file `turner-artifact-1.0-SNAPSHOT.jar` will be put into `Turner/artifact/pta/`directory.
 ```
-* Execute the amin method in `driver.Main`; or, run the PTA on a benchmark using the scripts comes with the Turner repository: 
+* Execute the main method in `driver.Main`; or, run the PTA on a benchmark using the scripts comes with the Turner repository: 
 ```shell
 # using the script in artifact/run.py
 $ python3 artifact/run.py antlr # antlr is an example benchmark option specified in artifact/util/benchmark.py file
 ```
 
 
-### Setup FlowDroid_Jasmine:
+--- 
 
-This table mainly shows the improvement of Jasmine's detection ability of FlowDroid, including the acquisition of all data and charts in Section 5.4 of the paper, mainly including TABLE V. This project mainly uses maven and IntelliJ IDEA, the maven version is 3.6.1, and the Java version is Java 8.
+## FlowDroid_Jasmine 
 
-### Setup FlowDroid_Jasmine: 
-
-#### Setup FlowDroid_Jasmine
-
-* Pull the `FlowDroid_Jasmine`` project and the benchmark to the local.
-
-```sh
-$ git clone https://github.com/SpringJasmine/FlowDroid_Jasmine.git
-$ git clone https://github.com/SpringJasmine/Benchmark_FlowDroid
-$ cd Benchmark_FlowDroid
-$ pwd # Copy the absolute path of Benchmark_FlowDroid
-```
-* Open `FlowDroid_Jasmine` project with IntelliJ IDEA.
-
-* Modify the relevant configuration under the **`FlowDroid_Jasmine/dataleak`** module
-
-```java
-// com.taint.analysis.utils.BenchmarksConfig
-public class BenchmarksConfig {
-    // Modify "/users/flowdroidplus/demo" to the absolute path of Benchmark_Flowdroid
-    private static String basePath = "/Users/FlowDroidPlus/demo";
-    ...
-```
-
-<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830194211420.png" alt="image-20220830190756735" style="zoom:33%;" />
-
-```java
-// com.taint.analysis.Main
-// Modify the field of benchmark to project name and the field of analysisalgorithm to the detection algorithm (cha, spark, Jasmine)
-13:    public static String benchmark = "mall-admin";
-14:    public static String analysisAlgorithm = "cha";
-```
-possible values for benchmark can be found in `com.taint.analysis.utils.BenchmarksConfig` file.
-
-<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830194431055.png" alt="image-20220830190756735" style="zoom:33%;" />
-
-* The fourth step is to add `FlowDroid_Jasmine/dataleak/dist/PointerAnalysis-1.0-SNAPSHOT.jar` as a project dependency; add the following to `dataleak/pom.xml` file: 
-```diff
-+<repositories>
-+    <repository>
-+        <id>localrepository</id>
-+        <url>file://${pom.basedir}/libs</url>
-+    </repository>
-+</repositories>
-
-<dependencies>
-+        <dependency>
-+            <groupId>com.example</groupId>
-+            <artifactId>PointerAnalysis</artifactId>
-+            <version>1.0-SNAPSHOT</version>
-+            <scope>system</scope>
-+            <systemPath>${pom.basedir}/libs/PointerAnalysis-1.0-SNAPSHOT.jar</systemPath>
-+        </dependency>
-</dependencies>
-```
-
-* The fifth step is to modify the content of `dataleak/src/main/resources/config.json` according to the actual environment. For example, let's say we are analyzing benchmark `mall-admin`, then the `config.json` file should be modified to the following:
-
-```json
-// Modify "source" and "edge_config" to the path of the corresponding file
-{
-  "source": "/Users/FlowDroidPlus/dataleak/src/main/resources/source.json",
-  "main_class": "com.macro.mall.MallAdminApplication", // mall-admin main class
-  "edge_config": "/Users/FlowDroidPlus/dataleak/src/main/resources/config.properties"
-}
-```
-
-* The content of `/Users/FlowDroidPlus/dataleak/src/main/resources/config.properties` is: 
-```properties
-# the application mall-admin does not have a xml to specify beans, thus the file remains empty
-```
-
-<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830194748092.png" alt="image-20220830190756735" style="zoom:33%;" />
-
-#### Run FlowDroid_Jasmine
-
-* Modify the relevant configuration in `Infoflow.java` in the `soot-infoflow` Module:
-
-```java
-// soot.jimple.infoflow.Infoflow
-// Modify the value of analysisAlgorithm according to step 4 (cha, spark, jasmine)
-269:            String analysisAlgorithm = "cha";
-270:            if (analysisAlgorithm.equals("cha")) {
-271:                config.setCallgraphAlgorithm(CallgraphAlgorithm.CHA);
-272:            } else {
-273:                config.setCallgraphAlgorithm(CallgraphAlgorithm.SPARK);
-274:            }
-```
-
-* Execute the main method in `com.taint.analysis.Main` in the `dataleak` Module
-
-<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830195001032.png" alt="image-20220830190756735" style="zoom:33%;" />
+Setup ad Run FlowDroid_Jasmine, please refer to instructions in https://github.com/dorawyy/FlowDroid_Jasmine. 
