@@ -136,10 +136,10 @@ _The docker container used in the previous section is for Doop_Jasmine only; for
 * Maven version is 3.6.1
 * Clone the following two projects:
  ```bash
- git clone https://github.com/SpringJasmine/Jasmine
+ git clone https://github.com/dorawyy/Jasmine
 
  ```
-* Open [the cloned project](https://github.com/SpringJasmine/Jasmine) in IntelliJ (or other IDE)
+* Open [the cloned project](https://github.com/dorawyy/Jasmine) in IntelliJ (or other IDE)
 
 
 #### 1.2 CHA, SPARK and Jasmine（corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges）

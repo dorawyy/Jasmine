@@ -27,7 +27,7 @@ public class ParserSpringMain {
 
         // processing Spring framework
         CreateEdge createEdge = new CreateEdge();
-        String path = "config.properties";
+        String path = "/data/yingying/mista/Jasmine/src/main/resources/config.properties";
         createEdge.initCallGraph(path);
         // print jimple
         Iterator<SootClass> iterator = Scene.v().getApplicationClasses().snapshotIterator();
@@ -62,6 +62,7 @@ public class ParserSpringMain {
 
         long endTime = System.currentTimeMillis();
         System.out.println("run time: " + (endTime - startTime) / (1000.0) + "s");
+        PackManager.v().writeOutput(); // write output jimple files
     }
 
     public static void initializeSoot(String sourceDirectory) {
