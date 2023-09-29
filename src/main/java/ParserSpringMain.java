@@ -82,14 +82,6 @@ public class ParserSpringMain {
         PackManager.v().writeOutput(); // write output jimple files
     }
 
-    private static InputStream getFileAsIOStream(final String fileName) {
-        InputStream ioStream = Main.class.getClassLoader().getResourceAsStream(fileName);
-
-        if (ioStream == null) {
-            throw new IllegalArgumentException(fileName + " is not found");
-        }
-        return ioStream;
-    }
 
     public static void initializeSoot(String sourceDirectory) {
         G.reset();
