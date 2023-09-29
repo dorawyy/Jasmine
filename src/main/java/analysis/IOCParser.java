@@ -72,7 +72,7 @@ public class IOCParser {
                     assert initMethod != null;
                     SootClass fieldClass = ((RefType) field.getType()).getSootClass();
                     if (fieldClass.isPhantom()) {
-                        System.out.println("can't find this bean: " + fieldClass.getName() + " in " + sootClass);
+                        System.out.println("can't find this bean [phantom class]: " + fieldClass.getName() + " in " + sootClass);
                         continue;
                     }
                     if (filterBaseClass(fieldClass)) {
@@ -98,7 +98,7 @@ public class IOCParser {
                         initIOCObjectByPrototype(sootFieldRef, initMethod, vtype, hierarchyClass.getType().toString(), initStr);
                         continue;
                     } else {
-                        System.out.println("can't find this bean: " + fieldClass.getName() + " in " + sootClass);
+                        System.out.println("can't find this bean [might due to fieldClass being interface]: " + fieldClass.getName() + " in " + sootClass);
                     }
                 }
 

@@ -6,31 +6,46 @@ import soot.shimple.Shimple;
 import utils.GenJimpleUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 
 /**
  * Test class for processing Spring framework
  */
 public class ParserSpringMain {
     // Obtain the path of the project and dependent packages to be tested
-    public static String appDirectory = System.getProperty("user.dir") + File.separator + "demo" + File.separator + "target-demo-0.0.1" ;
-    public static String sourceDirectory = appDirectory + File.separator + "BOOT-INF" + File.separator + "classes";
-    public static String dependencyDirectory = appDirectory + File.separator + "BOOT-INF" + File.separator + "lib";
+    // public static String appDirectory = System.getProperty("user.dir") + File.separator + "demo" + File.separator + "target-demo-0.0.1" ;
+    public static String jasmineConfig = System.getProperty("user.dir") + File.separator + "config" + File.separator + "jasmine.properties";
+    public static String beanConfig = System.getProperty("user.dir") + File.separator + "config" + File.separator + "bean.properties";
+    public static String sourceDir = ""; 
+    public static String dependencyDir = ""; 
 
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
 
-        System.out.println("sourceDirectory is: " + sourceDirectory);
-        System.out.println("dependencyDirectory is: " + dependencyDirectory);
-        initializeSoot(sourceDirectory);
+        // read jasmine config and bean config
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileInputStream(jasmineConfig));
+            String appDir = properties.getProperty("benchmark"); // should be unzipped jar directory
+            sourceDir = appDir + File.separator + "BOOT-INF" + File.separator + "classes";
+            dependencyDir = appDir + File.separator + "BOOT-INF" + File.separator + "lib";
+            System.out.println("sourceDir is: " + sourceDir);
+            System.out.println("dependencyDir is: " + dependencyDir);
+            initializeSoot(sourceDir);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // processing Spring framework
         CreateEdge createEdge = new CreateEdge();
-        String path = "/data/yingying/mista/Jasmine/src/main/resources/config.properties";
-        createEdge.initCallGraph(path);
+        createEdge.initCallGraph(beanConfig);
         // print jimple
         Iterator<SootClass> iterator = Scene.v().getApplicationClasses().snapshotIterator();
         while (iterator.hasNext()) {
@@ -59,12 +74,21 @@ public class ParserSpringMain {
         pack.apply();
 
         pack = PackManager.v().getPack("wjtp");
-        pack.add(new Transform("wjtp.ForwardTrans", new ForwardTransformer(sourceDirectory)));
+        pack.add(new Transform("wjtp.ForwardTrans", new ForwardTransformer(sourceDir)));
         pack.apply();
 
         long endTime = System.currentTimeMillis();
         System.out.println("run time: " + (endTime - startTime) / (1000.0) + "s");
         PackManager.v().writeOutput(); // write output jimple files
+    }
+
+    private static InputStream getFileAsIOStream(final String fileName) {
+        InputStream ioStream = Main.class.getClassLoader().getResourceAsStream(fileName);
+
+        if (ioStream == null) {
+            throw new IllegalArgumentException(fileName + " is not found");
+        }
+        return ioStream;
     }
 
     public static void initializeSoot(String sourceDirectory) {
@@ -120,12 +144,12 @@ public class ParserSpringMain {
         String sootCp = javaHome + File.separator + "lib" + File.separator + "rt.jar";
         sootCp += File.pathSeparator + javaHome + File.separator + "lib" + File.separator + "jce.jar";
 
-        File file = new File(dependencyDirectory);
+        File file = new File(dependencyDir);
         File[] fs = file.listFiles();
         if(fs != null){
             for (File f : Objects.requireNonNull(fs)) {
                 if (!f.isDirectory())
-                    sootCp += File.pathSeparator + dependencyDirectory + File.separator + f.getName();
+                    sootCp += File.pathSeparator + dependencyDir + File.separator + f.getName();
             }
         }
         return sootCp;
