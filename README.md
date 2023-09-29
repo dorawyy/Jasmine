@@ -144,7 +144,7 @@ _The docker container used in the previous section is for Doop_Jasmine only; for
 
 #### 1.2 CHA, SPARK and Jasmine（corresponding to ID-1-EntryPoint, ID-4-SpringAOP, ID-7-Reachable  Methods, ID-8-Application Edges）
 
-* Modify `src/main/resources/config.properties` to specify `bean_xml_paths` to the absolute path of the xml file specifying beans 
+* Modify `config/bean.properties` to specify `bean_xml_paths` to the absolute path of the xml file specifying beans 
 
 ```properties
 # Modify bean_xml_paths to the absolute path where the corresponding file
@@ -161,38 +161,43 @@ bean_xml_paths = /User/Jasmine/demo/target-demo-0.0.1/BOOT-INF/classes/bean.xml
 
 ```java
 //When the following three lines are not commented, jasmine is turned on
-29: CreateEdge createEdge = new CreateEdge();
-30: String path = "config.properties"; // Modify field to the path of config.properties in resources
-31: createEdge.initCallGraph(path);
-...    
-74: // turn on SPARK and Jasmine
-    Options.v().setPhaseOption("cg.spark", "on");
-    Options.v().setPhaseOption("cg.spark", "verbose:true");
-    Options.v().setPhaseOption("cg.spark", "enabled:true");
-    Options.v().setPhaseOption("cg.spark", "propagator:worklist");
-    Options.v().setPhaseOption("cg.spark", "simple-edges-bidirectional:false");
-    Options.v().setPhaseOption("cg.spark", "on-fly-cg:true");
-    // Options.v().setPhaseOption("cg.spark", "pre-jimplify:true");
-    Options.v().setPhaseOption("cg.spark", "double-set-old:hybrid");
-    Options.v().setPhaseOption("cg.spark", "double-set-new:hybrid");
-    Options.v().setPhaseOption("cg.spark", "set-impl:double");
-    Options.v().setPhaseOption("cg.spark", "apponly:true");
-    Options.v().setPhaseOption("cg.spark", "simple-edges-bidirectional:false");
-87: Options.v().set_verbose(true);
-88:
-89: // turn on CHA
-    // Options.v().setPhaseOption("cg.cha", "on");
-    // Options.v().setPhaseOption("cg.cha", "enabled:true");
-    // Options.v().setPhaseOption("cg.cha", "verbose:true");
-    // Options.v().setPhaseOption("cg.cha", "apponly:true");
-94: // Options.v().set_verbose(true);
+CreateEdge createEdge = new CreateEdge();
+createEdge.initCallGraph(path);
+...
+// turn on SPARK and Jasmine
+Options.v().setPhaseOption("cg.spark", "on");
+Options.v().setPhaseOption("cg.spark", "verbose:true");
+Options.v().setPhaseOption("cg.spark", "enabled:true");
+Options.v().setPhaseOption("cg.spark", "propagator:worklist");
+Options.v().setPhaseOption("cg.spark", "simple-edges-bidirectional:false");
+Options.v().setPhaseOption("cg.spark", "on-fly-cg:true");
+// Options.v().setPhaseOption("cg.spark", "pre-jimplify:true");
+Options.v().setPhaseOption("cg.spark", "double-set-old:hybrid");
+Options.v().setPhaseOption("cg.spark", "double-set-new:hybrid");
+Options.v().setPhaseOption("cg.spark", "set-impl:double");
+Options.v().setPhaseOption("cg.spark", "apponly:true");
+Options.v().setPhaseOption("cg.spark", "simple-edges-bidirectional:false");
+Options.v().set_verbose(true);
+
+// turn on CHA
+// Options.v().setPhaseOption("cg.cha", "on");
+// Options.v().setPhaseOption("cg.cha", "enabled:true");
+// Options.v().setPhaseOption("cg.cha", "verbose:true");
+// Options.v().setPhaseOption("cg.cha", "apponly:true");
+// Options.v().set_verbose(true);
 ```
 
 <img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830193130.png" alt="image-20220830190756735" style="zoom:33%;" />
 
-* Execute the main method in ```src/main/java/ParserSpringMain```
+* Configure the application to analyze in file `config/jasmine.properties`
 
-<img src="https://github.com/SpringJasmine/IMAGE/blob/main/image-20220830190756735.png" alt="image-20220830190756735" style="zoom:33%;" />
+* Compile and run the generated jar to build call graph
+
+```sh
+$ cd Jasmine
+$ mvn clean install -DskipTests
+$ java -jar target/jasmine-jar-with-dependencies.jar
+```
 
 #### 1.3 SPARK, Jasmine context-sensitive（corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype)）
 
