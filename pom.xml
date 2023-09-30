@@ -24,7 +24,7 @@
             <artifactId>soot</artifactId>
             <version>4.2.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/libs/sootclasses-trunk.jar</systemPath>
+            <systemPath>${project.basedir}/libs/sootclasses-trunk-jar-with-dependencies.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

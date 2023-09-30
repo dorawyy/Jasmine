@@ -1,16 +1,12 @@
 import analysis.CreateEdge;
 import analysis.ForwardTransformer;
 import soot.*;
-import soot.jimple.Jimple;
 import soot.options.Options;
-import soot.shimple.Shimple;
-// import soot.shimple.Shimple;
 import utils.GenJimpleUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -127,7 +123,7 @@ public class ParserSpringMain {
         Options.v().set_soot_classpath(getSootClassPath());
         Options.v().set_verbose(true);
         Options.v().set_output_format(Options.output_format_class);
-        // Options.v().set_output_dir(sourceDir);
+        Options.v().set_output_dir(sourceDir);
         Scene.v().loadNecessaryClasses();
         PhaseOptions.v().setPhaseOption("jb", "use-original-names:true");
     }
