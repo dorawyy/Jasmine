@@ -5,7 +5,12 @@ import soot.SootClass;
 import soot.SourceLocator;
 import soot.options.Options;
 
-import java.io.*;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @ClassName   GenJimpleUtil
@@ -15,9 +20,11 @@ public class GenJimpleUtil {
     public static void write(SootClass sClass) {
         OutputStream streamOut = null;
         try {
-            String filename = SourceLocator.v().getFileNameFor(sClass, Options.output_format_shimple);
+            // String filename = SourceLocator.v().getFileNameFor(sClass, Options.output_format_shimple);
+            String filename = SourceLocator.v().getFileNameFor(sClass, Options.output_format_jimple);
             String processProjectName = "PointerAnalysis";
-            filename = "ShimpleResult" + File.separator + processProjectName + File.separator + filename;
+            filename = "JimpleResult" + File.separator + processProjectName + File.separator + filename;
+            System.out.println("[write] write " + filename);
             int i = filename.lastIndexOf(File.separator);
             String f1 = filename.substring(0, i);
             File file1 = new File(f1);

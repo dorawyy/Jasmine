@@ -210,6 +210,7 @@ public class CreateEdge {
             mainMethod.setActiveBody(jimpleBody);
             psm = mainMethod;
         }
+        System.out.println("[generateEntryPoints] psm is " + psm.getSignature());
         for (SootClass controller : AnnotationAnalysis.controllers) {
             linkMainAndController(controller, psm);
         }

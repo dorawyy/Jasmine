@@ -23,6 +23,8 @@
             <groupId>org.soot-oss</groupId>
             <artifactId>soot</artifactId>
             <version>4.2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/sootclasses-trunk.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

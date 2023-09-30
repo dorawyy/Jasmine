@@ -1,8 +1,10 @@
 import analysis.CreateEdge;
 import analysis.ForwardTransformer;
 import soot.*;
+import soot.jimple.Jimple;
 import soot.options.Options;
 import soot.shimple.Shimple;
+// import soot.shimple.Shimple;
 import utils.GenJimpleUtil;
 
 import java.io.File;
@@ -55,6 +57,7 @@ public class ParserSpringMain {
                     if (!method.hasActiveBody()) {
                         method.retrieveActiveBody();
                     }
+                    /*
                     Body body = method.getActiveBody();
                     try {
                         body = Shimple.v().newBody(body);
@@ -64,12 +67,14 @@ public class ParserSpringMain {
                         System.err.println(body);
                         System.err.println(e);
                     }
+                    */
                 }
 
             }
+            System.out.println("GenJimpleUtil.write(" + applicationClass + ")");
             GenJimpleUtil.write(applicationClass);
         }
-
+        System.out.println("Writing call graph...");
         Pack pack = PackManager.v().getPack("cg");
         pack.apply();
 
@@ -121,7 +126,7 @@ public class ParserSpringMain {
         Options.v().set_keep_line_number(true);
         Options.v().set_soot_classpath(getSootClassPath());
         Options.v().set_verbose(true);
-        Options.v().set_output_format(Options.output_format_jimple);
+        Options.v().set_output_format(Options.output_format_class);
         // Options.v().set_output_dir(sourceDir);
         Scene.v().loadNecessaryClasses();
         PhaseOptions.v().setPhaseOption("jb", "use-original-names:true");
