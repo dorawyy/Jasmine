@@ -196,7 +196,7 @@ Options.v().set_verbose(true);
 ```sh
 $ cd Jasmine
 $ mvn clean install -DskipTests
-$ java -jar target/jasmine-jar-with-dependencies.jar
+$ java -cp target\jasmine-jar-with-dependencies.jar;libs\sootclasses-trunk-jar-with-dependencies.jar ParserSpringMain
 ```
 
 #### 1.3 SPARK, Jasmine context-sensitive（corresponding to ID-2-DI(Singleton), ID-3-DI(Prototype)）
